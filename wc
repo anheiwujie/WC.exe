@@ -1,0 +1,70 @@
+Wc c = new Wc();//创建对象
+            Console.Write("wc.exe");
+            string msg = Console.ReadLine();
+            string[] newm = msg.Split(new char[] { ' ' });//去掉空格 拆分成几个字符串
+            int n = newm.Length;
+            string str = newm[n - 1];//记录文件路径
+            foreach (string i in newm)
+            {
+                if (i == "-c")
+                {
+                    c.Read(str, 1);//字符数目功能
+                }
+                else if (i == "-w")
+                {
+                    c.Read(str, 2);//单词数
+                }
+                else if (i == "-l")
+                {
+                    c.Read(str, 3);//行数目
+                }
+//byte[] byData = new byte[10000];//应该注释掉，一开始用的byte类型，后来发现有点问题
+        FileStream file = new FileStream(a, FileMode.Open);
+        StreamReader sr = new StreamReader(file);//访问文件并读取
+        //file.Read(byData, 0, 10000);
+        switch (b) 
+        {case 1:
+                {
+                    /*while (byData[i] != '\0')
+                    {
+                        c++;
+                        i++;
+                    }*/
+                    int Ichar = 0;
+                    while ((Ichar = sr.Read()) != -1)    // 不再有可用的字符，则为 -1  
+                    {
+                        if (Ichar != ' ')
+                        {
+                            c++;
+                        }
+                    }
+                    Console.WriteLine("字符数为：" + c);
+                    file.Close();
+                } break;
+            case 2:
+                {
+                    int Ichar = 0； //增加 char[] no = { ' ', '\n', '{', '}', '(', ')', '=',                     '+', '_', '*', '%' };                   
+　　　　　　　　　　　 while ((Ichar = sr.Read()) != -1)    
+                    {
+                        if (Ichar == ' ' || Ichar == '\n')//这我在想想更准确的判断方法 - -！
+                        {                               //  for (int ss = 0; ss < 11; ss++)
+                            w++;                        //  {
+                        }                              //    if (Ichar ==no[ss])    这个更加                     准确！
+                    }
+                    Console.WriteLine("单词数为：" + w);
+                    file.Close();
+                } break;
+            case 3:
+                {
+                    int Ichar = 0;
+                    while ((Ichar = sr.Read()) != -1)    
+                    {
+                        if (sr.ReadLine() != null)
+                        {
+                            l++;
+                        }
+                    }
+                    Console.WriteLine("行数为：" + l);
+                    file.Close();
+                } break;
+        }
